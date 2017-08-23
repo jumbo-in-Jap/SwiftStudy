@@ -15,8 +15,8 @@ class MainViewModel {
     var isFetching = Variable<Bool>(false)
 
     private let disposeBag = DisposeBag()
-    
+
     init() {
-        
+
     }
 }

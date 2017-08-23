@@ -12,9 +12,9 @@ import RxSwift
 import SwiftyJSON
 
 struct ApiClientService {
- 
+
     func fetchQiitaItems(success: @escaping (_ data: [AnyObject])-> Void, fail: @escaping (_ error: Error?)-> Void) {
-        let url: String = "https://qiita.com/api/v2/items/e49a673afd9a3ecb81a8/comments"
+        let url: String = "https://qiita.com/api/v2/items"
         Alamofire.request(url).responseJSON { response in
             if response.result.isSuccess {
                 guard let value = response.result.value else {

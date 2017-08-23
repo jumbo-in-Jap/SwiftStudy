@@ -11,23 +11,21 @@ import RxSwift
 import RxCocoa
 
 class MainViewController: UIViewController {
-    
-    var dataList = ["青山","阿部","加藤","川島","神田","佐藤","坂田","田中"]
-    
+
     let viewModel = MainViewModel()
     let dispose = DisposeBag()
-    
+
     @IBOutlet weak var tableView: UITableView!
 
     @IBAction func onClick() {
         self.viewModel.isFetching.value = true
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.bind()
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
