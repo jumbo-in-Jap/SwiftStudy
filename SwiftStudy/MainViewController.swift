@@ -18,8 +18,6 @@ class MainViewController: UIViewController {
     let dispose = DisposeBag()
     
     @IBOutlet weak var tableView: UITableView!
-    
-     let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, Repository>>()
 
     @IBAction func onClick() {
         self.viewModel.isFetching.value = true
@@ -28,12 +26,6 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.bind()
-        
-        dataSource.configureCell = { (_, tv, ip, viewModel: MainViewModel) in
-            let cell = tv.dequeueReusableCell(withIdentifier: "TestCell")!
-            cell.textLabel?.text = viewModel.items.value
-            return cell
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -67,7 +59,10 @@ extension MainViewController {
         self.viewModel
             .items
             .asObservable()
-            .drive(tableView.rx.items(dataSource: dataSource))
+            .bind(to: tableView.rx.items(cellIdentifier: "TestCell")) {
+                (index, _, cell) in
+                cell.textLabel?.text = "hoge"
+            }
             .addDisposableTo(dispose)
     }
 }
