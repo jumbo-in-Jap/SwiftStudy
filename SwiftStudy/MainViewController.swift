@@ -41,8 +41,8 @@ extension MainViewController {
                 if isFetching {
                     let client = ApiClientService()
                     client.fetchQiitaItems(
-                        success: { (data: [AnyObject]) in
-                            self.viewModel.items.value = data
+                        success: { (data) in
+                            self.viewModel.items.value = data.array!
                             self.viewModel.isFetching.value = false
                         },
                         fail: { (error: Error?) in
@@ -58,8 +58,8 @@ extension MainViewController {
             .items
             .asObservable()
             .bind(to: tableView.rx.items(cellIdentifier: "TestCell")) {
-                (index, _, cell) in
-                cell.textLabel?.text = "hoge"
+                (index, item, cell) in
+                cell.textLabel?.text = item["title"].stringValue
             }
             .addDisposableTo(dispose)
     }

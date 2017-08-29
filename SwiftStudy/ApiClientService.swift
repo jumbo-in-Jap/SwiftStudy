@@ -13,7 +13,7 @@ import SwiftyJSON
 
 struct ApiClientService {
 
-    func fetchQiitaItems(success: @escaping (_ data: [AnyObject])-> Void, fail: @escaping (_ error: Error?)-> Void) {
+    func fetchQiitaItems(success: @escaping (_ data: JSON)-> Void, fail: @escaping (_ error: Error?)-> Void) {
         let url: String = "https://qiita.com/api/v2/items"
         Alamofire.request(url).responseJSON { response in
             if response.result.isSuccess {
@@ -21,7 +21,7 @@ struct ApiClientService {
                     return
                 }
                 let json = JSON(value)
-                success([json as AnyObject])
+                success(json)
             }else{
                 fail(response.result.error)
             }

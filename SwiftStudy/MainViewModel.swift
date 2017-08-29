@@ -8,10 +8,11 @@
 
 import Foundation
 import RxSwift
+import SwiftyJSON
 
 class MainViewModel {
 
-    var items = Variable<[AnyObject]>([])
+    var items = Variable<[JSON]>([])
     var isFetching = Variable<Bool>(false)
 
     private let disposeBag = DisposeBag()
